@@ -8,6 +8,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.Options;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.player.AbstractClientPlayer;
+import net.minecraft.util.Mth;
 import net.minecraft.world.phys.Vec3;
 
 /**
@@ -25,6 +26,30 @@ public class FreecamEntity extends AbstractClientPlayer {
         this.getAbilities().flying = true;
     }
 
+    private float lookYaw;
+    private float lookPitch;
+
+    /** Sets the starting look direction. The camera keeps its own copy so nothing else can overwrite it. */
+    public void initLook(float yaw, float pitch) {
+        lookYaw = yaw;
+        lookPitch = pitch;
+        applyLook();
+    }
+
+    /** Mouse movement (same 0.15 scaling as vanilla). */
+    public void look(double dYaw, double dPitch) {
+        lookYaw += (float) dYaw * 0.15F;
+        lookPitch = Mth.clamp(lookPitch + (float) dPitch * 0.15F, -90.0F, 90.0F);
+        applyLook();
+    }
+
+    private void applyLook() {
+        this.setYRot(lookYaw);
+        this.setXRot(lookPitch);
+        this.yRotO = lookYaw;
+        this.xRotO = lookPitch;
+    }
+
     /** Movement is driven from the client tick (see FreecamClient), so the normal entity tick does nothing. */
     @Override
     public void tick() {
@@ -33,6 +58,7 @@ public class FreecamEntity extends AbstractClientPlayer {
     /** Called once per client tick: moves the camera according to the movement keys. */
     public void updateMotion(Options o) {
         this.setOldPosAndRot();
+        this.applyLook();
 
         float yaw = this.getYRot();
         Vec3 forward = Vec3.directionFromRotation(0, yaw);

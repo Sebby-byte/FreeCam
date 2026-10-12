@@ -16,7 +16,7 @@ public class EntityMixin {
     @Inject(method = "turn", at = @At("HEAD"), cancellable = true)
     private void freecamlite$turn(double yaw, double pitch, CallbackInfo ci) {
         if (FreecamClient.isActive() && (Object) this == Minecraft.getInstance().player) {
-            FreecamClient.getCamera().turn(yaw, pitch);
+            FreecamClient.getCamera().look(yaw, pitch);
             ci.cancel();
         }
     }

@@ -77,6 +77,7 @@ public class FreecamClient implements ClientModInitializer {
 
         camera = new FreecamEntity(level, -420);
         camera.snapTo(player.getX(), player.getY(), player.getZ(), player.getYRot(), player.getXRot());
+        camera.initLook(player.getYRot(), player.getXRot());
         level.addEntity(camera);
 
         if (savedCameraType != CameraType.FIRST_PERSON) {

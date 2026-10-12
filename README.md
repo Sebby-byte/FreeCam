@@ -9,5 +9,5 @@ Detach the camera and fly around while your character stays put.
 - Only chunks and entities the server has already sent you are visible, so you cannot see farther than your render distance.
 - Some servers do not allow freecam. Check the rules before using it online.
 
-Build: Java 25, then `gradle build` (Gradle 9.6.0). Jar: `build/libs/freecamlite-1.0.0.jar`.
+Build: push to GitHub; the jar appears under Releases.
 Needs Fabric Loader 0.19.5+ and Fabric API 0.161.0+26.3.
