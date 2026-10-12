@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "id": "freecamlite",
+  "version": "${version}",
+  "name": "Freecam Lite",
+  "description": "Detach the camera and fly around while your character stays put. Client side.",
+  "authors": ["You"],
+  "license": "MIT",
+  "environment": "client",
+  "entrypoints": {
+    "client": ["com.example.freecamlite.FreecamClient"]
+  },
+  "mixins": ["freecamlite.mixins.json"],
+  "depends": {
+    "fabricloader": ">=0.19.1",
+    "minecraft": "~26.3",
+    "java": ">=25",
+    "fabric-api": "*"
+  }
+}
